@@ -32,20 +32,10 @@ services:
       - LETTA_PG_HOST=pgvector_db
       - LETTA_PG_PORT=5432
       - LETTA_DEBUG=True
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - GROQ_API_KEY=${GROQ_API_KEY}
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
-      - AZURE_API_KEY=${AZURE_API_KEY}
-      - AZURE_BASE_URL=${AZURE_BASE_URL}
-      - AZURE_API_VERSION=${AZURE_API_VERSION}
-      - GEMINI_API_KEY=${GEMINI_API_KEY}
-      - VLLM_API_BASE=${VLLM_API_BASE}
-      - OPENLLM_AUTH_TYPE=${OPENLLM_AUTH_TYPE}
-      - OPENLLM_API_KEY=${OPENLLM_API_KEY}
-   #volumes:
-      #- ./configs/server_config.yaml:/root/.letta/config # config file
-      #- ~/.letta/credentials:/root/.letta/credentials # credentials file
+      - OPENAI_API_KEY=$(cat ${OPENAI_API_KEY_FILE})  # Uses host secrets
+    volumes:
+      - /docker/secrets/openai_api_key.txt:/docker/secrets/openai_api_key.txt:ro
+
   letta_nginx:
     hostname: letta-nginx
     image: nginx:stable-alpine3.17-slim
