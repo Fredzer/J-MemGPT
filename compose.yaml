@@ -2,6 +2,7 @@ services:
   letta_db:
     image: ankane/pgvector:v0.5.1
     networks:
+      - default
       default:
         aliases:
           - pgvector_db
@@ -15,8 +16,6 @@ services:
     #  - ${LOCALVOL:-.}./init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./.persist/pgdata:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - default
     ports:
       - "5432:5432"
   
