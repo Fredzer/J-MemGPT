@@ -12,7 +12,7 @@ services:
       - POSTGRES_DB=${LETTA_PG_DB:-letta}
     volumes:
       - ${LOCALVOL:-.}/.persist/pgdata:/var/lib/postgresql/data
-      - ${LOCALVOL:-.}/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ${LOCALVOL:-.}./init.sql:/docker-entrypoint-initdb.d/init.sql
    networks:
       - default
     ports:
@@ -47,7 +47,7 @@ services:
     hostname: letta-nginx
     image: nginx:stable-alpine3.17-slim
     volumes:
-      - ${LOCALVOL:-.}/nginx.conf:/etc/nginx/nginx.conf
+      - ${LOCALVOL:-.}./nginx.conf:/etc/nginx/nginx.conf
     networks:
       - default
     ports:
