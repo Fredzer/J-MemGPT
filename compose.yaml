@@ -15,6 +15,7 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
+
   letta_server:
     image: lettaai/letta:latest
     hostname: letta
@@ -24,7 +25,7 @@ services:
       - "8083:8083"
       - "8283:8283"
     env_file:
-      - .env
+      - stack.env  # Portainer to load read stack environment variables and create this file
     environment:
       - LETTA_PG_DB=${LETTA_PG_DB:-letta}
       - LETTA_PG_USER=${LETTA_PG_USER:-letta}
@@ -32,9 +33,7 @@ services:
       - LETTA_PG_HOST=pgvector_db
       - LETTA_PG_PORT=5432
       - LETTA_DEBUG=True
-      - OPENAI_API_KEY=$(cat ${OPENAI_API_KEY_FILE})  # Uses host secrets
-    volumes:
-      - /docker/secrets/openai_api_key.txt:/docker/secrets/openai_api_key.txt:ro
+      - OPENAI_API_KEY=${ENV_OPENAI_API_KEY}
 
   letta_nginx:
     hostname: letta-nginx
