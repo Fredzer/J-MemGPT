@@ -1,0 +1,11 @@
+# Custom Dictionary Words
+ankane
+GROQ
+initdb
+letta
+LOCALVOL
+OLLAMA
+OPENLLM
+pgvector
+SERPAPI
+VLLM

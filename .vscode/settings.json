@@ -1,0 +1,14 @@
+{
+    "cSpell.language": "en,en-GB",
+    "cSpell.customDictionaries": {
+        "custom-dictionary-workspace": {
+            "name": "custom-dictionary-workspace",
+            "path": "${workspaceFolder:J-MemGPT}/.cspell/custom-dictionary-workspace.txt",
+            "addWords": true,
+            "scope": "workspace"
+        }
+    },
+    "cSpell.enableFiletypes": [
+        "!dockercompose"
+    ]
+}
