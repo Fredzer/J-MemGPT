@@ -13,19 +13,19 @@ services:
     volumes:
       - ${LOCALVOL:-.}/.persist/pgdata:/var/lib/postgresql/data
       - ${LOCALVOL:-.}/init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - "5432:5432"
+    network_mode: "service:letta_server" # Uses service name for unexposed internal db access only 
 
   letta_server:
     image: lettaai/letta:latest
     hostname: letta
     depends_on:
       - letta_db
-    networks:
-      - default
-    ports:
-      - "8083:8083"
-      - "8283:8283"
+    #networks:
+    #  - default
+    network_mode: "service:letta_server" # Uses service name for unexposed internal db access only
+    #ports:
+    #  - "8083:8083"
+    #  - "8283:8283"
     env_file:
       - stack.env  # Portainer to load read stack environment variables and create this file
     environment:
