@@ -1,7 +1,7 @@
 services:
   letta_db:
     image: ankane/pgvector:v0.5.1
-    networks:
+    network_mode: "service:letta_server" # Uses service name for unexposed internal db access only 
       default:
         aliases:
           - pgvector_db
@@ -13,7 +13,7 @@ services:
     volumes:
       - ${LOCALVOL:-.}/.persist/pgdata:/var/lib/postgresql/data
       - ${LOCALVOL:-.}/init.sql:/docker-entrypoint-initdb.d/init.sql
-    network_mode: "service:letta_server" # Uses service name for unexposed internal db access only 
+    
 
   letta_server:
     image: lettaai/letta:latest
