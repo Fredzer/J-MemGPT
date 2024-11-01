@@ -44,9 +44,14 @@
 # all defaulting to 'letta'.
 
 # Version tags can be found here: https://hub.docker.com/r/ankane/pgvector/tags
+# syntax = docker/dockerfile:1.6
+
+
+# Start with pgvector image
+# Copy init SQL script into the initialization directory
 ARG PGVECTOR=v0.5.1
-# Set up a minimal postgres image
 FROM ankane/pgvector:${PGVECTOR}
+
 RUN sed -e 's/^    //' >/docker-entrypoint-initdb.d/01-initletta.sql <<'EOF'
     -- Title: Init Letta Database
 
@@ -85,3 +90,14 @@ RUN sed -e 's/^    //' >/docker-entrypoint-initdb.d/01-initletta.sql <<'EOF'
 
     DROP SCHEMA IF EXISTS public CASCADE;
 EOF
+
+# Ensure permissions on the PostgreSQL data directory
+RUN mkdir -p /var/lib/postgresql/data && \
+    chown -R postgres:postgres /var/lib/postgresql/data && \
+    chmod 700 /var/lib/postgresql/data
+
+# Set entrypoint back to the default
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+# Expose default port
+EXPOSE 5432

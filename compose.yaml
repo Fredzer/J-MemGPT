@@ -1,8 +1,8 @@
 services:
   letta_db:
     build:
-      context: .  # Path to the root of the project
-      dockerfile: Dockerfile.pgvector  # New Dockerfile for PostgreSQL
+      context: .  # Root of the project
+      dockerfile: db/Dockerfile.pgvector  # Updated Dockerfile for PostgreSQL with custom initialization
     networks:
       default:
         aliases:
