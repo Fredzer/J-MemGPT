@@ -1,0 +1,15 @@
+# Use pgvector image as the base for PostgreSQL
+FROM ankane/pgvector:v0.5.1
+
+# Copy the database initialization script
+COPY init-letta-db.sh /usr/local/bin/init-letta-db.sh
+RUN chmod +x /usr/local/bin/init-letta-db.sh
+
+# Copy default init.sql if it doesn’t exist
+COPY init.sql /default-scripts/init.sql
+
+# Set entrypoint to our custom init script
+ENTRYPOINT ["/usr/local/bin/init-letta-db.sh"]
+
+# Expose PostgreSQL's default port
+EXPOSE 5432
