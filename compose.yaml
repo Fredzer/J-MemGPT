@@ -40,15 +40,15 @@ services:
       - LETTA_EMBEDDING_MODEL=${LETTA_EMBEDDING_MODEL}
       - OPENAI_API_KEY=${ENV_OPENAI_API_KEY}
 
-  letta_nginx:
-    hostname: letta-nginx
-    image: nginx:stable-alpine3.17-slim
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    networks:
-      - default
-    ports:
-      - "80:80"
+  # letta_nginx:
+  #   hostname: letta-nginx
+  #   image: nginx:stable-alpine3.17-slim
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf
+  #   networks:
+  #     - default
+  #   ports:
+  #     - "80:80"
 
 networks:
   default:
