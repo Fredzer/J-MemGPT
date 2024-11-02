@@ -11,7 +11,7 @@ services:
       - POSTGRES_PASSWORD=${LETTA_PG_PASSWORD:-letta}
       - POSTGRES_DB=${LETTA_PG_DB:-letta}
     volumes:
-      - ${LOCALVOL}/${STACKNAME}/.persist/pgdata:/var/lib/postgresql/data
+      - ${LOCALVOL}/${STACKNAME}/.persist/pgdata:/var/lib/postgresql/data #This folder must already exist at the moment for Portainer Stack from Repo
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
